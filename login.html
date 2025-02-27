@@ -1,0 +1,125 @@
+<section class="login-section" id="login">
+    <div class="form-container">
+        <h2>Login to Avatar Fitness</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Enter Username" required>
+            <select id="subscriptionPlan" required>
+                <option value="" disabled selected>Select Your Plan</option>
+                <option value="Basic">Basic - ₹3000/month</option>
+                <option value="Pro">Pro - ₹5000/month</option>
+                <option value="Premium">Premium - ₹8000/month</option>
+            </select>
+            <button type="submit">Login</button>
+        </form>
+        <button id="backToHomeBtn" class="back-btn">Back to Home Page</button>
+    </div>
+</section>
+
+<script>
+    // JavaScript to handle form submission and redirect
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from reloading the page
+
+        // Get values from form inputs
+        const username = document.getElementById('username').value;
+        const subscriptionPlan = document.getElementById('subscriptionPlan').value;
+
+        // Store data in localStorage
+        localStorage.setItem('username', username);
+        localStorage.setItem('subscriptionPlan', subscriptionPlan);
+
+        // Redirect to dashboard
+        window.location.href = 'dashborad.html';
+    });
+</script>
+<script>
+    // Redirect to the home page when the back button is clicked
+    document.getElementById('backToHomeBtn').addEventListener('click', function () {
+        window.location.href = 'index.html'; // Update with your actual home page file name
+    });
+</script>
+
+
+
+<style>
+    .login-section {
+    background: linear-gradient(to right, #007bff, #6c63ff);
+    color: #fff;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-container {
+    background: #fff;
+    color: #333;
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.form-container input,
+.form-container select,
+.form-container button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.form-container button {
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-container button:hover {
+    background: #0056b3;
+}
+
+.form-container select {
+    appearance: none;
+    background: #f4f4f4;
+}
+
+.form-container select:focus {
+    background: #fff;
+}
+
+@media (max-width: 768px) {
+    .login-section {
+        padding: 30px 10px;
+    }
+    .form-container {
+        padding: 20px;
+    }
+}
+
+</style>
+
