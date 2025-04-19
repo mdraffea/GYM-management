@@ -50,4 +50,44 @@ const form = document.getElementById('loginForm');
         });
 //Typing text code//
 
- 
+fetch('http://localhost:3000/users/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: 'John Doe',
+      email: 'john@example.com',
+      password: 'password123',
+    }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('User registered:', data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+  const Cashfree = require('cashfree-sdk');
+
+  const paymentGateway = new Cashfree({
+    appId: 'your_app_id',
+    secretKey: 'your_secret_key',
+    environment: 'PROD', // or 'TEST'
+  });
+  
+  app.post('/payment/checkout', (req, res) => {
+    const { amount, orderId, customerDetails } = req.body;
+    const paymentData = {
+      orderId,
+      orderAmount: amount,
+      orderCurrency: 'INR',
+      customerDetails,
+      returnUrl: 'https://yourdomain.com/payment/response',
+    };
+  
+    paymentGateway.createOrder(paymentData)
+      .then(order => res.json(order))
+      .catch(err => res.status(500).json({ error: err.message }));
+  });
+    
